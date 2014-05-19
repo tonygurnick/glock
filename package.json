@@ -1,0 +1,29 @@
+{
+  "name": "glock",
+  "version": "0.0.0",
+  "description": "glock =====",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "nodeunit": "~0.9.0",
+    "toerr": "0.0.4"
+  },
+  "devDependencies": {
+    "nodeunit": "^0.9.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tonygurnick/glock.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tonygurnick/glock/issues"
+  },
+  "homepage": "https://github.com/tonygurnick/glock"
+}
