@@ -1,8 +1,7 @@
 
  var encode = require("../src/encode"),
 	 decode = require("../src/decode"),
-	 writer = require("../src/writer"),
-	 reader = require("../src/reader"),
+
  	 gm = require('gm').subClass({ imageMagick: true }),
  	 path=require("path");
 

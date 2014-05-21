@@ -12,7 +12,6 @@
 		for (var y = 0; y < img.height; y++) {
 			for (var x = 0; x < img.width; x++) {
 				var idx = (img.width * y + x) << 2;
-
 				img.data[idx]   = dataString.charCodeAt(idx);
 				img.data[idx+1] = dataString.charCodeAt(idx+1);
 				img.data[idx+2] = dataString.charCodeAt(idx+2);
