@@ -1,66 +1,29 @@
 
-	var fs = require("fs");
-	var ToErr = require("toerr");
-
-	module.exports=function( filename, cb ){
-
-		var glockFileEncoder = new ToErr("glock");
-		glockFileEncoder.addMessage( "NOTFOUND", "F", "File %s does not exist");
-		glockFileEncoder.addMessage( "FILEEXISTS", "I", "File exists");
+	var PNG = require('pngjs').PNG;
 
 
 
-		if ( fs.existsSync( filename )  ){
-			fs.readFile( filename, function( err, data ) {
 
-				if (err) cb( err );
+	module.exports=function( buffer, cb ){
 
-				cb(null, {filename:filename});
-			});
-		} else {
-			glockFileEncoder.log("NOTFOUND", filename );
+		text = buffer.toString("utf-8");
+
+		var len =  Math.ceil( text.length / 4 );
+		var width = Math.ceil( len/Math.sqrt(len) );
+		var height=width;
+		var img = new PNG({ width: width, height: height, filterType: 4 });
+
+
+		for (var y = 0; y < img.height; y++) {
+			for (var x = 0; x < img.width; x++) {
+				var idx = (img.width * y + x) << 2;
+
+				img.data[idx]   = text.charCodeAt(idx);
+				img.data[idx+1] = text.charCodeAt(idx+1);
+				img.data[idx+2] = text.charCodeAt(idx+2);
+				img.data[idx+3] = text.charCodeAt(idx+3);
+			}
 		}
 
-
+		return img.pack();
 	};
-
-//
-//<?
-//
-//
-//if (file_exists($filename)) {
-//
-//	$iFileSize = filesize($filename);
-//
-//	$iWidth = ceil(sqrt($iFileSize / 1));
-//	$iHeight = $iWidth;
-//
-//	$im = imagecreatetruecolor($iWidth, $iHeight);
-//
-//	$fs = fopen($filename, "r");
-//	$data = fread($fs, $iFileSize);
-//	fclose($fs);
-//
-//	$i = 0;
-//
-//	for ($y=0;$y<$iHeight;$y++) {
-//	for ($x=0;$x<$iWidth;$x++) {
-//	$ord = ord($data[$i]);
-//	imagesetpixel($im,
-//	$x, $y,
-//	imagecolorallocate($im,
-//	$ord,
-//	$ord,
-//	$ord
-//	)
-//	);
-//	$i++;
-//	}
-//	}
-//
-//	header("Content-Type: image/png");
-//	imagepng($im);
-//	imagedestroy($im);
-//	}
-//
-//?>
