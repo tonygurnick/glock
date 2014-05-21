@@ -1,6 +1,6 @@
 
 
-function PNGData(strFilename, fncCallback) {
+function decodec(strFilename, fncCallback) {
 	// test for canvas and getImageData
 	var bCanvas = false;
 	var oCanvas = document.createElement("canvas");
