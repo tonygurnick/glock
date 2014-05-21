@@ -1,16 +1,14 @@
 
-	var PNG = require('pngjs').PNG;
+	var PNG = require('pngjs').PNG,
+	fs = require("fs");
 
+	module.exports=function( imageBuffer, filename, cb ){
 
-
-
-	module.exports=function( buffer, cb ){
-
-		text = buffer.toString("utf-8");
+		text = imageBuffer.toString("utf-8");
 
 		var len =  Math.ceil( text.length / 4 );
-		var width = Math.ceil( len/Math.sqrt(len) );
-		var height=width;
+		var width = height = Math.ceil( len/Math.sqrt(len) );
+
 		var img = new PNG({ width: width, height: height, filterType: 4 });
 
 
@@ -24,6 +22,14 @@
 				img.data[idx+3] = text.charCodeAt(idx+3);
 			}
 		}
+		if ( cb ) {
+			img.pack().pipe(fs.createWriteStream(filename).on("finish", function (err) {
 
-		return img.pack();
+				console.log("CALLBACK2")
+				cb(err, filename)
+
+			}));
+		} else {
+			return img.pack();
+		}
 	};

@@ -81,18 +81,19 @@
 
 	 },
 	 encodeAndWrite:function( test ){
-		 var text=reader("test/jquery-2.1.1.js");
-		 var encodedFile = encode( text );
-
-		 test.equals( encodedFile.height, 249);
-		 test.equals( encodedFile.width, 249);
 
 
-		 writer(  "test/jquery-2.1.1.js.png", encodedFile );
+		 var encodedFile = encode( reader("test/jquery-2.1.1.js"), "test/jquery-2.1.1.js.png", function(){
 
-
+//			 test.equals( encodedFile.height, 249);
+//			 test.equals( encodedFile.width, 249);
 			 test.ok( true, "test/jquery-2.1.1.js.png");
 			 test.done();
+		 });
+
+
+
+
 
 
 
