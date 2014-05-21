@@ -22,17 +22,43 @@
 		return img;
 	};
 
-	module.exports=function( dataBuffer, filename, cb ){
+//	module.exports=function( dataBuffer, filename, cb ){
+//
+//		var img = encode( dataBuffer.toString("utf-8") );
+//
+//		if ( filename && cb ) {
+//
+//			img.pack().pipe( fs.createWriteStream(filename).on("finish", function ( err  ) {
+//
+//				cb(err, img );
+//			}));
+//		} else {
+//			return img.pack();
+//		}
+//	};
 
-		var img = encode( dataBuffer.toString("utf-8") );
+	module.exports=function( input, outfile, cb ){
 
-		if ( filename && cb ) {
+		var img,png,fileExists = fs.existsSync(input);
 
-			img.pack().pipe( fs.createWriteStream(filename).on("finish", function ( err  ) {
-
-				cb(err, img );
+		if ( fileExists ) {
+			img = encode( fs.readFileSync( input ).toString("utf-8") );
+			png = img.pack().pipe( fs.createWriteStream(outfile).on("finish", function ( err  ) {
+				if ( typeof cb === "function" ) {
+					img.filename = png.path;
+					cb(err, img);
+				}
 			}));
+		} else if ( outfile && cb ) {
+
+			img = encode( input.toString("utf-8"));
+			png = img.pack().pipe( fs.createWriteStream(outfile).on("finish", function ( err  ) {
+				if ( typeof cb === "function" ) {
+					cb(err, img);
+				}
+			}));
+
 		} else {
-			return img.pack();
+			return encode( input.toString("utf-8") ).pack();
 		}
 	};

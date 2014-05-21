@@ -83,12 +83,13 @@
 	 encodeAndWrite:function( test ){
 
 
-		 var encodedFile = encode( reader("test/jquery-2.1.1.js"), "test/jquery-2.1.1.js.png", function(){
+		encode( "test/jquery-2.1.1.js", "test/jquery-2.1.1.js.png", function( err, encoded ){
 
-//			 test.equals( encodedFile.height, 249);
-//			 test.equals( encodedFile.width, 249);
-			 test.ok( true, "test/jquery-2.1.1.js.png");
+			 test.equals( encoded.height, 249);
+			 test.equals( encoded.width, 249);
+			 test.equals( encoded.filename, "test/jquery-2.1.1.js.png");
 			 test.done();
+
 		 });
 
 	 },
@@ -96,21 +97,19 @@
 
 		 var expectedText = encode( "THE RAIN IN SPAIN").data.toString();
 
-		 encode( "THE RAIN IN SPAIN", "test/SPANISHMAIN.png", function(){
-			  decode("test/SPANISHMAIN.png", function( err, data){
-				  test.equals( data, "THE RAIN IN SPAIN");
+		 encode( "THE RAIN IN SPAIN", "test/SPANISHMAIN.png", function( err, encoded ){
+
+			  decode("test/SPANISHMAIN.png", function( err, decoded ){
+				  test.equals( decoded, "THE RAIN IN SPAIN");
 				  test.done();
 			  });
-
-
 		 });
 	 },
 	 justDecode:function( test ){
 
 		 var encodedText = encode( "THE RAIN IN SPAIN");
-
-
 		 var decodedText = decode( encodedText );
+
 		 test.equals( decodedText, "THE RAIN IN SPAIN");
 		 test.done();
 
