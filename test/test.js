@@ -91,26 +91,18 @@
 			 test.done();
 		 });
 
-
-
-
-
-
-
-
 	 },
 	 readAndDecode:function( test ){
 
-//		 var img = writer( encode( "ABCDEFG" ), "test/ABCDEFG.png", function( err, filename ){
-//
-//
-//		 });
-//		var fileBuffer= reader("test/ABCDEFG.png");
-//		           console.log(fileBuffer)
-//		 test.equals( text, "ABCDEFG");
+		 var expectedText = encode( "THE RAIN IN SPAIN").data.toString();
+
+		 encode( "THE RAIN IN SPAIN", "test/SPANISHMAIN.png", function(){
+			  decode("test/SPANISHMAIN.png", function( err, data){
+				  test.equals( data, expectedText);
+				  test.done();
+			  });
 
 
-		 test.done();
-
+		 });
 	 }
  };
