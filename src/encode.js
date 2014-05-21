@@ -24,10 +24,7 @@
 		}
 		if ( cb ) {
 			img.pack().pipe(fs.createWriteStream(filename).on("finish", function (err) {
-
-				console.log("CALLBACK2")
 				cb(err, filename)
-
 			}));
 		} else {
 			return img.pack();
