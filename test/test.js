@@ -98,11 +98,21 @@
 
 		 encode( "THE RAIN IN SPAIN", "test/SPANISHMAIN.png", function(){
 			  decode("test/SPANISHMAIN.png", function( err, data){
-				  test.equals( data, expectedText);
+				  test.equals( data, "THE RAIN IN SPAIN");
 				  test.done();
 			  });
 
 
 		 });
+	 },
+	 justDecode:function( test ){
+
+		 var encodedText = encode( "THE RAIN IN SPAIN");
+
+
+		 var decodedText = decode( encodedText );
+		 test.equals( decodedText, "THE RAIN IN SPAIN");
+		 test.done();
+
 	 }
  };
