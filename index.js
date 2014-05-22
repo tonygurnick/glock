@@ -2,8 +2,8 @@
 
 module.exports={
 
-	encode:require("src/encode"),
-	decode:require("src/decode"),
-	decodec:require("src/decodec")
+	encode:require("./src/encode"),
+	decode:require("./src/decode"),
+	decodec:require("./src/decodec")
 
 };
