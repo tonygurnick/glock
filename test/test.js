@@ -112,13 +112,5 @@
 		 test.equals( decodedText, "THE RAIN IN SPAIN");
 		 test.done();
 
-	 },
-	 aaaa:function( test ){
-
-		 encode( " ", "test/space.png", function( err, encoded ){
-
-				 test.done();
-
-		 });
 	 }
  };
