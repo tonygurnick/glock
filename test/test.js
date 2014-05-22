@@ -115,7 +115,7 @@
 	 },
 	 aaaa:function( test ){
 
-		 encode( "aaaa", "test/aaaa.png", function( err, encoded ){
+		 encode( " ", "test/space.png", function( err, encoded ){
 
 				 test.done();
 
